@@ -10,7 +10,7 @@
 
 export AWS_PROFILE=default
 
-excludes=" --exclude '.CFid' --exclude 'README.md' --exclude 'index.html.orig' --exclude '.git/*' --exclude '.DS_Store' --exclude 'archive/*' "
+excludes=" --exclude '.CFid' --exclude 'README.md' --exclude 'index.html.orig' --exclude '.git/*' --exclude '.DS_Store' --exclude 'archive/*' --exclude '.claude/*' --exclude '[A-Z]_*' --exclude '[0-9]_*' "
 
 eval aws s3 sync . s3://www.dfwskyview.com/preview/ ${excludes} --no-follow-symlinks
 
