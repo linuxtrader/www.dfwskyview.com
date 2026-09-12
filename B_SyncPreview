@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Sync this site into a /preview/ subfolder on the production bucket,
+# then invalidate CloudFront's cache for that folder so the change
+# shows up right away at:
+#   https://www.dfwskyview.com/preview/index.html
+#
+# Same bucket/CloudFront distribution as production, different path.
+# Does not touch anything at the bucket root -- production is untouched.
+
+export AWS_PROFILE=default
+
+excludes=" --exclude '.CFid' --exclude 'README.md' --exclude 'index.html.orig' --exclude '.git/*' --exclude '.DS_Store' --exclude 'archive/*' "
+
+eval aws s3 sync . s3://www.dfwskyview.com/preview/ ${excludes} --no-follow-symlinks
+
+aws cloudfront create-invalidation --distribution-id E3L4RITZ2SYT0U --paths "/preview/*"
+
+echo
+echo Review at https://www.dfwskyview.com/preview/index.html

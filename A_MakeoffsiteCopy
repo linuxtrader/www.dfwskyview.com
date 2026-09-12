@@ -1,0 +1,4 @@
+#! /bin/bash
+
+echo pushing to backup repo
+git push backup master
