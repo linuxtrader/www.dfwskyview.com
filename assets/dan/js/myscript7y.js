@@ -30,6 +30,13 @@
 			         <source src="'+myVid+'" type="video/mp4"> \
 			         Your browser does not support HTML5 video. </video>');
         }
+	// Dynamically injected <video> elements don't always start loading on
+	// their own -- force it explicitly.
+	var vidEl = $bgvidSection.find('video')[0];
+	if (vidEl) {
+	    vidEl.load();
+	    vidEl.play().catch(function() {});
+	}
 	// Stop page jump
 	return false;
      }
@@ -38,6 +45,7 @@
      //
      function adjustDesktop() {
 	 // Build myArrow
+	 /*
 	    var myArrow  = $(`<div class="mbr-arrow hidden-sm-down" aria-hidden="true">
 	                      <a href="#info1-v"> <i class="mbri-down mbr-iconfont"></i> </a>
 	                      </div>`);
@@ -47,6 +55,7 @@
             $("#header2-f").append(myArrow)
 	                   .fadeTo(0,0)
                            .fadeTo(2000, 1);
+	 */
 
 
          // Larger marzipano viewport on desktop.  Now default
