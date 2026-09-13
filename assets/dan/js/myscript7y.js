@@ -9,6 +9,14 @@
 
         if (!$.isMobile()) adjustDesktop();
 
+	// Chrome on mobile leaves a white strip above the video (its own
+	// top edge/frame showing before the video content fills in) --
+	// pull it up to tuck under the gray section above, same idea as
+	// the desktop offset. Safari on the same devices doesn't need this.
+	if ($.isMobile() && navigator.userAgent.match(/CriOS|Chrome/i)) {
+	    $("#header2-f").css("margin-top", "-90px");
+	}
+
     });
 
 
@@ -39,6 +47,9 @@
 	// their own -- force it explicitly.
 	var vidEl = $bgvidSection.find('video')[0];
 	if (vidEl) {
+	    // Some Chrome versions (esp. mobile) only allow autoplay if
+	    // muted is set as a JS property, not just the HTML attribute.
+	    vidEl.muted = true;
 	    vidEl.load();
 	    vidEl.play().catch(function() {});
 	}

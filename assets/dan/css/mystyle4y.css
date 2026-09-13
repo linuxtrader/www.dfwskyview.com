@@ -18,11 +18,26 @@ nav {
 }
 
 /*  The specific section on this page if attribute present*/
+/*  top/padding-bottom offsets removed -- these compensated for the
+    video section sitting at the very top of the page under a fixed
+    mobile nav bar; the section has since moved mid-page (see
+    index.html #header2-f), so these were adding stray extra space. */
  section[data-bg-video] {
-  top: 84px;             /* mobile was 100  */
   padding-top:     0;    /* desktop+mobile if postition: inherit, not absolute  */
-  padding-bottom: 78px;  /* mobile, was 90px */
+  padding-bottom:  0;    /* desktop+mobile -- matches padding-top above */
 }
+
+/* The section right after the video ("Choose a media package", #info1-v)
+   has its own 30px top padding, which showed as a visible pale line
+   below the video on mobile where the gray video box meets its purple
+   background before the padding blends in. Not noticeable on desktop
+   (wider viewport, video fills more of the screen). */
+@media only screen and (max-width: 799px) {
+  #info1-v {
+    padding-top: 0 !important;
+  }
+}
+
 
 @media only screen and (min-width: 800px) {
  section[data-bg-video] {
@@ -45,6 +60,8 @@ nav {
    width:100%;
    height: auto;
    position: inherit !important;
+   display: block;  /* video defaults to inline, which leaves a few px
+                        of baseline whitespace below it */
 }
 
 /*  Overrides for wowslider by class*/
