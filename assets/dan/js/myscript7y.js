@@ -18,6 +18,11 @@
      function loadVideo() {
 	var $bgvidSection = $("#header2-f");
 	var myVid = $bgvidSection.attr("data-bg-video");
+	// Use the HD version on desktop for better color/quality; mobile
+	// keeps the smaller LD file to save bandwidth.
+	if (!$.isMobile()) {
+	    myVid = myVid.replace('LD.mp4', 'HD.mp4');
+	}
 	if (myVid.indexOf(' ') !== -1) {
 	    var myParse = myVid.split(" "); //arg0 = video file,  arg1 = poster image
 	    $bgvidSection.html('<video class="mbr-background-video" poster="'+myParse[1]+'" \
